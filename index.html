@@ -1,1 +1,209 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="QueueSense helps people check crowd levels and estimated waiting times at public places.">
+  <title>QueueSense | Smart Crowd Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="#" class="logo">
+      <span class="logo-icon">Q</span>
+      QueueSense
+    </a>
+
+    <nav>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#places">Explore Places</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <button class="report-nav-btn" id="openReport">
+      + Report Crowd
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="dashboard">
+      <div class="hero-content">
+        <span class="eyebrow">✦ COMMUNITY-POWERED INTELLIGENCE</span>
+        <h1>Know the crowd.<br><span>Before you go.</span></h1>
+        <p>
+          Make smarter decisions with community-powered crowd
+          updates and estimated waiting times at public places.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#places" class="primary-btn">Explore Places →</a>
+          <button class="secondary-btn" id="heroReport">Report Crowd +</button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-card">
+          <span class="visual-label">LIVE CROWD OVERVIEW</span>
+          <div class="visual-number" id="totalPlaces">06</div>
+          <p>Places being monitored</p>
+          <div class="visual-divider"></div>
+          <div class="visual-stats">
+            <div>
+              <strong class="green-text" id="lowCount">02</strong>
+              <small>Low crowd</small>
+            </div>
+            <div>
+              <strong class="yellow-text" id="moderateCount">02</strong>
+              <small>Moderate</small>
+            </div>
+            <div>
+              <strong class="red-text" id="highCount">02</strong>
+              <small>High crowd</small>
+            </div>
+          </div>
+          <span class="visual-footer">Community-powered updates</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="stat-card">
+        <span>◉</span>
+        <div>
+          <h2 id="statPlaces">06</h2>
+          <p>Tracked places</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span>↗</span>
+        <div>
+          <h2 id="statReports">128</h2>
+          <p>Community reports</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span>◷</span>
+        <div>
+          <h2 id="statAverage">14 min</h2>
+          <p>Average wait</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="places-section" id="places">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">EXPLORE YOUR SURROUNDINGS</span>
+          <h2>Discover public places</h2>
+          <p>Check the latest community-reported crowd conditions.</p>
+        </div>
+        <span class="demo-label">DEMO DATA</span>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <span>⌕</span>
+          <input type="text" id="searchInput"
+            placeholder="Search places or locations...">
+        </div>
+
+        <select id="categoryFilter">
+          <option value="All">All categories</option>
+          <option value="Hospital">Hospitals</option>
+          <option value="Restaurant">Restaurants</option>
+          <option value="Shopping">Shopping malls</option>
+          <option value="Transport">Transport</option>
+          <option value="Government">Government offices</option>
+          <option value="Tourism">Tourist places</option>
+        </select>
+
+        <select id="crowdFilter">
+          <option value="All">All crowd levels</option>
+          <option value="Low">Low crowd</option>
+          <option value="Moderate">Moderate crowd</option>
+          <option value="High">High crowd</option>
+        </select>
+      </div>
+
+      <div class="places-grid" id="placesGrid"></div>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <h3>No places found</h3>
+        <p>Try changing your search or filters.</p>
+      </div>
+    </section>
+
+    <section class="how-section" id="about">
+      <span class="eyebrow">HOW QUEUESENSE WORKS</span>
+      <h2>Better decisions in three steps.</h2>
+
+      <div class="steps-grid">
+        <article class="step-card">
+          <span>01</span>
+          <h3>Explore</h3>
+          <p>Find a public place and check its latest crowd status.</p>
+        </article>
+        <article class="step-card">
+          <span>02</span>
+          <h3>Understand</h3>
+          <p>See estimated waiting times based on recent reports.</p>
+        </article>
+        <article class="step-card">
+          <span>03</span>
+          <h3>Contribute</h3>
+          <p>Share your own observation and help other visitors.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#" class="logo">
+      <span class="logo-icon">Q</span> QueueSense
+    </a>
+    <p>Know the crowd. Before you go.</p>
+    <small>© 2026 QueueSense. Built to make public visits smarter.</small>
+  </footer>
+
+  <!-- Crowd report modal -->
+  <div class="modal-overlay" id="reportModal" hidden>
+    <div class="modal">
+      <button class="close-btn" id="closeReport">×</button>
+      <span class="eyebrow">COMMUNITY CONTRIBUTION</span>
+      <h2>Report crowd status</h2>
+      <p class="modal-description">
+        Share what you are observing at a public place.
+      </p>
+
+      <form id="reportForm">
+        <label for="reportPlace">Select a place</label>
+        <select id="reportPlace" required></select>
+
+        <label for="reportCrowd">Current crowd level</label>
+        <select id="reportCrowd" required>
+          <option value="">Choose crowd level</option>
+          <option value="Low">Low</option>
+          <option value="Moderate">Moderate</option>
+          <option value="High">High</option>
+        </select>
+
+        <label for="reportWait">Estimated waiting time (minutes)</label>
+        <input type="number" id="reportWait" min="0" max="300"
+          placeholder="Example: 15" required>
+
+        <button type="submit" class="primary-btn submit-btn">
+          Submit Crowd Report →
+        </button>
+      </form>
+      <p class="form-message" id="formMessage"></p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
