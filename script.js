@@ -1,4 +1,9 @@
 
+const supabaseClient = window.supabase.createClient(
+  "https://ppoqlaultbatbjyajisz.supabase.co/rest/v1/",
+  "sb_publishable_UFp2QNvBXuyTTK41h_UMzQ__BneGC70"
+);
+
 const places = [
   {
     id: 1,
